@@ -5,7 +5,7 @@
     "description": "Users API Documentation",
     "version": "1.0.0"
   },
-  "host": "cse341-ffh5.onrender.com/",
+  "host": "cse341-ffh5.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
