@@ -5,10 +5,9 @@
     "description": "Users API Documentation",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "cse341-ffh5.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http",
     "https"
   ],
   "paths": {
@@ -25,16 +24,6 @@
         }
       }
     },
-    "/api-docs": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
     "/books/": {
       "get": {
         "description": "",
@@ -44,14 +33,14 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
       "post": {
-        "tags": [
-          "Books"
-        ],
-        "description": "Create a new book",
+        "description": "",
         "parameters": [
           {
             "name": "body",
@@ -91,9 +80,6 @@
           "201": {
             "description": "Created"
           },
-          "204": {
-            "description": "No Content"
-          },
           "400": {
             "description": "Bad Request"
           },
@@ -120,21 +106,23 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
       "put": {
-        "tags": [
-          "Books"
-        ],
-        "description": "Update an existing book",
+        "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string",
-            "description": "Book ID"
+            "type": "string"
           },
           {
             "name": "body",
@@ -171,11 +159,14 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "OK"
           },
           "400": {
             "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -183,9 +174,6 @@
         }
       },
       "delete": {
-        "tags": [
-          "Books"
-        ],
         "description": "",
         "parameters": [
           {
@@ -196,8 +184,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
