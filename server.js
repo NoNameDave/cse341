@@ -3,7 +3,7 @@ const mongodb = require('./data/database');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const session = require('express-session');
-const GitHubStrategy = require('passport-github').Strategy;
+const GitHubStrategy = require('passport-github2').Strategy;
 const cors = require('cors');
 
 const app = express();
@@ -25,7 +25,7 @@ app
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With ,Content-Type, Accept, Z-key');
     next()})
     .use(cors({methods: ['GET', 'POST', 'PUT', 'DELETE', 'UPDATE', 'PATCH']}))
-    .use(cors({origin: "*"}))
+    .use(cors({origin: '*'}))
     .use('/', require('./routes'));
 
 passport.use(new GitHubStrategy(
