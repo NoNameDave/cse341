@@ -9,6 +9,10 @@ const cors = require('cors');
 const app = express();
 const port = 3000;
 
+console.log("GitHub Client ID:", process.env.GITHUB_CLIENT_ID);
+console.log("GitHub Client Secret:", process.env.GITHUB_CLIENT_SECRET);
+console.log("Callback URL:", process.env.CALLBACK_URL);
+
 app
     .use(bodyParser.json())
     .use(session({
@@ -55,8 +59,8 @@ app.get('/', (req, res) => {res.send(req.session.user !== undefined ? `Logged in
 
 app.get('/github/callback', passport.authenticate('github', { failureRedirect: '/api-docs', session: true }), 
     (req, res) => {
+        console.log("GitHub User:", req.user);
         req.session.user = req.user; 
-        req.user = req.user;
         res.redirect('/');
 });
 
