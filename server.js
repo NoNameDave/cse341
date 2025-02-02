@@ -24,9 +24,14 @@ app
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, Options');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With ,Content-Type, Accept, Z-key');
     next()})
-    .use(cors({methods: ['GET', 'POST', 'PUT', 'DELETE', 'UPDATE', 'PATCH']}))
-    .use(cors({origin: '*'}))
+    .use(cors({
+        origin: '*',
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'UPDATE', 'PATCH'],
+        allowedHeaders: ['Content-Type', 'Authorization']
+    }))
     .use('/', require('./routes'));
+    
+
 
 passport.use(new GitHubStrategy(
     {
@@ -48,10 +53,13 @@ passport.deserializeUser((user, done) => {
 
 app.get('/', (req, res) => {res.send(req.session.user !== undefined ? `Logged in as ${req.session.user.displayName}` : "Logged Out")});
 
-app.get('/github/callback', passport.authenticate('github', {failureRedirect: '/api-docs', session: false}), (req, res) => {
-    req.session.user = req.user;
-    res.redirect('/');
+app.get('/github/callback', passport.authenticate('github', { failureRedirect: '/api-docs', session: true }), 
+    (req, res) => {
+        req.session.user = req.user; 
+        req.user = req.user;
+        res.redirect('/');
 });
+
 
 mongodb.initDb((err) => {
     if (err) {
